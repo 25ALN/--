@@ -800,7 +800,7 @@
 //     scanf("%d",&aln[n]);
 //     int len=n+1;
 //     for(int j=0;j<len;j++){
-//         for(int h=j;h<len-j-1;h++){
+//         for(int h=0;h<len-j-1;h++){
 //         if(aln[h]>aln[h+1]){
 //             int t=aln[h];
 //             aln[h]=aln[h+1];
@@ -881,8 +881,9 @@
 
 
 //pta5
+
 // int main(){
-//     int aln1[20]={0},aln2[20]={0},a=0,cnt=0;
+//     int aln1[20]={0},aln2[20]={0},c[20]={0},a=0,cnt=0;
 //     scanf("%d",&aln1[0]);
 //     for(int i=1;i<=aln1[0];i++){
 //       scanf("%d",&aln1[i]);
@@ -891,34 +892,53 @@
 //     for(int j=1;j<=aln2[0];j++){
 //       scanf("%d",&aln2[j]);
 //     }
-
-//     for(int z=1;z<=aln1[0];z++){
-//       for(int h=1;h<=aln2[0];h++){
-//          if(aln1[z]==aln2[h]){
-//             cnt=1;
-//             break;
-//          }
-//       }
-//       if(cnt==0&&a==0){
-//             a++;
-//             printf("%d",aln1[z]);
-//          }else if(cnt==0&&a!=0){
-//             printf(" %d",aln1[z]);
-//          }
-//          cnt=0;    
+//     for(int k=1;k<=aln1[0];k++){
+//         for(int o=1;o<=aln2[0];o++){
+//             if(aln1[k]==aln2[o]){
+//                 a=1;
+//                 break;
+//             }
+//         }
+//         if(a==0) {
+//             c[cnt]=aln1[k];
+//             cnt++;
+//         }
+//         a=0;
 //     }
+//     a=0;
 
-//     for(int z1=1;z1<=aln2[0];z1++){
-//       for(int h1=1;h1<=aln1[0];h1++){
-//          if(aln2[z1]==aln1[h1]){
-//             cnt=1;
-//             break;
-//          }
-//       }
-//       if(cnt==0){
-//        printf(" %d",aln2[z1]);
-//       }       
-//       cnt=0;
+//     for(int k=1;k<=aln2[0];k++){
+//         for(int o=1;o<=aln1[0];o++){
+//             if(aln2[k]==aln1[o]){
+//                 a=1;
+//                 break;
+//             }
+//         }
+//         if(a==0) {
+//             c[cnt]=aln2[k];
+//             cnt++;
+//         }
+//         a=0;
+//     }
+//         for(int y=0;y<cnt;y++){
+//         printf("%d ",c[y]);
+//     }
+//     printf("\n");
+//     int pi=0,pp=0;
+//     for(int p=0;p<cnt;p++){
+//         for(int p1=p;p1<cnt;p1++){
+//            if(c[p]==c[p1]&&p!=p1){
+//              pi=1;
+//              break;
+//            }
+//         }
+//         if(pi==0&&pp==0){
+//         printf("%d",c[p]);
+//         pp++;
+//         }else if(pi==0){
+//             printf(" %d",c[p]);
+//         }
+//         pi=0;
 //     }
 //     return 0;
 // }
@@ -938,19 +958,30 @@
 // }
 
 // int main(){
-//    int aln1[1000],aln2[1000]={0},x,i=0,max=0;
+//    int aln1[1000],aln2[1000]={1},x,i=0,max=0,len=0;
 //    scanf("%d",&aln1[0]);
 //    for(int i=1;i<=aln1[0];i++){
 //       scanf("%d",&aln1[i]);
-//       aln2[aln1[i]]++;
 //    }
-//    for(int j=1;j<1000;j++){
-//        if(max<aln2[j]){
-//          max=aln2[j];
-//          x=j;
-//        }
+//    if(aln1[0]==1){
+//     printf("%d %d",aln1[1],1);
+//    }else{
+//    len=aln1[0];
+//    for(int j=1;j<=len;j++){
+//       for(int z=1;z<=len;z++){
+//         if(aln1[j]==aln1[z]&&j!=z){
+//             aln2[j]++;
+//         }
+//       }
 //    }
-//    printf("%d %d",x,max);
+//    for(int k=1;k<=len;k++){
+//     if(max<aln2[k]){
+//         max=aln2[k];
+//         x=k;
+//     }
+//    }
+//    printf("%d %d",aln1[x],max+1);
+//    }
 //    return 0;
 // }
 
@@ -995,22 +1026,22 @@
 //    return 0;
 // }
 
-// int main(){
-//    char *s;
-//    s=(char*)malloc(sizeof(char)*9998);
-//    scanf("%s",s);
-//    int len=strlen(s);
-//    int aln[1000]={0};
-//    for(int i=0;i<len;i++){
-//       aln[s[i]]=1;
-//    }
-//    for(int j=0;j<len;j++){
-//       if(aln[s[j]]==1){
-//       printf("%c",s[j]);
-//       aln[s[j]]-=100;
-//       }
-//    }
-//    free(s);
-//    return 0;
-// }
+int main(){
+   char *s;
+   s=(char*)malloc(sizeof(char)*9998);
+   scanf("%s",s);
+   int len=strlen(s);
+   int aln[1000]={0};
+   for(int i=0;i<len;i++){
+      aln[s[i]]=1;
+   }
+   for(int j=0;j<len;j++){
+      if(aln[s[j]]==1){
+      printf("%c",s[j]);
+      aln[s[j]]-=100;
+      }
+   }
+   free(s);
+   return 0;
+}
 
