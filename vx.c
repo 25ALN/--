@@ -1195,19 +1195,16 @@
 // }
 
 int main(){
-    int nums[]={2,3,8,1,5,6,7,9,4};
-    int len=sizeof(nums)/sizeof(nums[0]);
-    for(int i=0;i<len-1;i++){
-        for(int j=0;j<len-i-1;j++){
-            if(nums[j]>nums[j+1]){
-                int temp=nums[j+1];
-                nums[j+1]=nums[j];
-                nums[j]=temp;
-            }
+    int nums[]={1,5,4,2,9,9,9},numsSize=sizeof(nums)/sizeof(nums[0]);
+    int slow=1,fast=1;
+    for(;fast<numsSize;fast++){
+        if(nums[fast]!=nums[fast-1]){
+            nums[slow]=nums[fast];
+            slow++;
         }
     }
-    for(int i=0;i<len;i++){
-        printf("%d ",nums[i]);
+    for(int j=0;j<slow;j++){
+    printf("%d ",nums[j]);
     }
     return 0;
 }
