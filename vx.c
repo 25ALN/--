@@ -1194,17 +1194,46 @@
 //     return 123;
 // }
 
+// int main(){
+//     int nums[]={5,3,3,1,1},numsSize=sizeof(nums)/sizeof(nums[0]);
+//     int slow=1,fast=1;
+//     for(;fast<numsSize;fast++){
+//         if(nums[fast]!=nums[fast-1]){
+//             nums[slow]=nums[fast];
+//             slow++;
+//         }
+//     }
+//     printf("%d\n",slow);
+//     for(int j=0;j<slow;j++){
+//     printf("%d ",nums[j]);
+//     }
+//     return 0;
+// }
+
+struct Student{
+    char*name;
+    int xuehao;
+    int grade[3];
+}student[10];
 int main(){
-    int nums[]={1,5,4,2,9,9,9},numsSize=sizeof(nums)/sizeof(nums[0]);
-    int slow=1,fast=1;
-    for(;fast<numsSize;fast++){
-        if(nums[fast]!=nums[fast-1]){
-            nums[slow]=nums[fast];
-            slow++;
+    double average[10];
+    for(int i=0;i<10;i++){
+        scanf("%s %d %d %d %d",&student[i].name,&student[i].xuehao,&student[i].grade[0],&student[i].grade[1],&student[i].grade[2]);
+    }
+    for(int j=0;j<10;j++){
+        average[j]=(student[j].grade[0]+student[j].grade[1]+student[j].grade[2])*1.0/3.0;
+    }
+    for(int z=0;z<10;z++){
+        for(int h=0;h<10-z;h++){
+            if(average[h]<average[h+1]){
+                double temp=average[h+1];
+                average[h+1]=average[h];
+                average[h]=temp;
+            }
         }
     }
-    for(int j=0;j<slow;j++){
-    printf("%d ",nums[j]);
+    for(int p=0;p<10;p++){
+        printf("%.2lf\n",average[p]);
     }
     return 0;
 }
