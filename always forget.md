@@ -247,3 +247,4 @@ cout.put(ch);
 
 习惯用const来替换调c语言中的#define
 static_cast<> 比传统强制类型转换更严格
+auto还可自动识别类型
