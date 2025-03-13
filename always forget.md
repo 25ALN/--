@@ -215,10 +215,14 @@ int main(){
 ```
 random是linux专用，它比rand质量更好
 
+## 归并排序
+vx.c中3535～3575
+
 ## c++
 ### 输入与输出
 - 输入
 cin >> 直接跟上变量
+他在读取字符串时以空格，换行，制表符来确定字符串结束的位置
 cout << 后面若是普通的字符串需要双引号，若是变量则不需要
 换行可采用c语言中的\n或是 << endl
 
@@ -244,7 +248,13 @@ int main(){
 用于输出一个字符
 char ch；
 cout.put(ch);
+- getline 与 get
+getline读取输入后将丢弃换行符，get则保留
+getline有两个参数，第一个是存字符串的数组名，第二个是字符数
 
 习惯用const来替换调c语言中的#define
 static_cast<> 比传统强制类型转换更严格
 auto还可自动识别类型
+
+- string类
+可以互相拼接，赋值

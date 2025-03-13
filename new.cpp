@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include <cstring>
 using namespace std;
 // int main(){
 //     using namespace std;
@@ -10,8 +12,9 @@ using namespace std;
 // }
 
 int main(){
-    float n=5.0;
-    float x=3.1;
-    cout << n/x <<endl;
+    string str1="hello";
+    string str2="world";
+    cout << str1+str2<<endl;
+    cout << str1.size();
     return 0;
 }
