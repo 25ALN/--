@@ -235,7 +235,12 @@ cin >> 直接跟上变量
 他在读取字符串时以空格，换行，制表符来确定字符串结束的位置
 cout << 后面若是普通的字符串需要双引号，若是变量则不需要
 换行可采用c语言中的\n或是 << endl
-
+- const
+如果想在多个文件之间共享const对象，必须在变量的定义前加extern
+类型	         作用位置	    可修改指针地址	可修改指向内容
+顶层 const	   变量本身	      不可修改	   可修改
+底层  const	   指向的内容	   可修改	      不可修改
+顶层+底层 const 指针+指向内容	 不可修改	    不可修改
 ### 显示不同进制的控制符
 dec 10进制
 hex 16进制
@@ -252,8 +257,25 @@ int main(){
    cout << oct;      //转化为8进制
    cout << x;        //输出52
 }
-```  
-## 一些常用函数
+```
+### 保留小数
+- setprecision() + fixed（常用）
+```c
+double num=3.41341;
+cout << fixed << setprecision() << num;
+```
+括号中的数字就是保留的位数，2就是保留两位小数
+- printf（与c完全相同）
+- round() (当需要实际保留相应的位数并进行计算时用)
+使用时加上 #include <cmath> 头文件
+```c
+double num = 3.1415926535;
+double rounded = round(num * 100.0) / 100.0;  // 保留两位小数
+cout << rounded << endl;
+```
+### 一些常用函数
+- auto
+类型说明符
 - cout.put()
 用于输出一个字符
 char ch；

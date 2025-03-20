@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cstring>
+#include <iomanip> //保留几位小数所需
 using namespace std;
 // int main(){
 //     using namespace std;
@@ -41,9 +42,43 @@ using namespace std;
 //     return 0;
 // }
 
+// int main(){
+//     int a=3,b=4;
+//     decltype(a) c=a;    //等价于 int c=a;
+//     decltype(a=b) d=a;  //等价于 int &d=a;
+//     ++c;++d;
+//     cout << "a="<< a << endl;
+//     cout << "b="<< b << endl;
+//     cout << "c="<< c << endl;
+//     cout << "d="<< d << endl;
+//     return 0;
+// }
+
+// 题目
+//1.
+// int main(){
+//     int a,b;
+//     cin >> a >> b;
+//     cout <<"zhouzhang:" << (a+b)*2<<endl;
+//     cout <<"mianji:"<<a*b<<endl;
+//     return 0;
+// }
+
+//2.
+// int main(){
+//     const double pi=3.1415926;
+//     int r;
+//     cin >> r;
+//     cout << fixed << setprecision(2) << "zhouc:"<< 2*r*pi<<endl;
+//     cout<<"mianji"<< pi*r*r;
+//     return 0;
+// }
+
+//3.
 int main(){
-    int i,&j=i;
-    i=5;j=10;
-    cout << i << " " << j;
+    double n;
+    cin >> n;
+    double x=n*n;
+    cout << fixed <<setprecision(1)<<((2*n-1+4)/x)*100<<"%";
     return 0;
-}
+}   
