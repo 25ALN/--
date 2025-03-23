@@ -2,7 +2,9 @@
 #include <string>
 #include <cstring>
 #include <iomanip> //保留几位小数所需
+#include <vector>
 using namespace std;
+// using std::string; 
 // int main(){
 //     using namespace std;
 //     int age;
@@ -75,10 +77,41 @@ using namespace std;
 // }
 
 //3.
-int main(){
-    double n;
-    cin >> n;
-    double x=n*n;
-    cout << fixed <<setprecision(1)<<((2*n-1+4)/x)*100<<"%";
-    return 0;
-}   
+// int main(){
+//     double n;
+//     cin >> n;
+//     double x=n*n;
+//     string qw(3,'a'); //这样的初始化不能加=
+//     cout << qw <<endl;
+//     cout << fixed <<setprecision(1)<<((2*n-1+4)/x)*100<<"%";
+//     return 0;
+// }   
+
+//字符串
+// int main(){
+//     string x="asADfa";
+//     // cout <<x.size()<<endl;
+//     // cout <<x[2]<<endl;
+//     // for(auto &c:x){
+//     //     c='x';
+//     // }
+//     int i=0;
+//     cout << i << " another "<< ++i<<endl;
+//     cout << x<<endl;
+//     cout << x.substr(1,4)<< endl;
+//     return 0;
+// }
+
+// int main(){
+//     vector<int> aln;
+//     for(int i=0;i<2;i++){
+//         aln.push_back(i);
+//     }
+//     auto x=aln.end();
+//     cout <<"x= "<< *x <<endl;
+//     for(auto i=aln.begin();i<=aln.end();i++){
+//         cout <<"num="<< aln[*i]<<endl;
+//     }
+//     return 0;
+// }
+

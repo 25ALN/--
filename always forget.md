@@ -288,5 +288,27 @@ getline有两个参数，第一个是存字符串的数组名，第二个是字�
 static_cast<> 比传统强制类型转换更严格
 auto还可自动识别类型
 
-- string类
-可以互相拼接，赋值
+-unordered_map
+```c
+#include <unordered_map>
+std::unordered_map<key_type, value_type> map_name;
+//key_type 是键的类型。
+//value_type 是值的类型。
+```
+其中每个键值都是唯一的
+#### string类
+可以互相拼接，赋值(用+，-，=)
+- size()：返回字符串的长度。
+- empty()：检查字符串是否为空。
+- operator[]：通过索引访问字符串中的字符。
+- substr()：获取子字符串。
+例如：string x=str.substr(1,4),x将获取到str下标从1开始的四个字符
+
+- find()：查找子字符串在主字符串中的位置。
+- replace()：替换字符串中的某些字符。
+std::string::npos 的值通常是 -1 或 ~0（即所有位都为 1），在实际中它是一个无符号整数的最大值 (std::string::size_type)。
+它的作用是指示未找到的情况。是一个特殊的常量
+在 std::string::find() 等查找函数中，如果目标子字符串不存在，就会返回 std::string::npos。
+### vector(容器)
+{}代表着赋值,()则是一种初始化；
+不能通过下标去进行初始化，应当使用push_back()
