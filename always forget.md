@@ -312,3 +312,19 @@ std::string::npos 的值通常是 -1 或 ~0（即所有位都为 1），在实�
 ### vector(容器)
 {}代表着赋值,()则是一种初始化；
 不能通过下标去进行初始化，应当使用push_back()
+
+### 堆的c++(优先队列)
+需包含头文件#include <queue>
+priority_queue<int> q;（大顶堆，在使用push操作时将大数放在堆顶）
+priority_queue<int,vector<int>,greater<int>> minHeap;（小堆顶） 
+```c
+1. top(): 返回优先队列中优先级最高的元素（即最大元素）。如果队列为空，调用 top() 会导致未定义行为，因此在调用前最好先检查队列是否为空。
+int top_element = q.top(); // 获取队列中优先级最高的元素
+2. empty(): 检查队列是否为空。如果队列为空，返回 true；否则返回 false。
+if (q.empty()) {
+   std::cout << "Priority queue is empty!" << std::endl;
+}
+3. size(): 返回队列中的元素个数。
+int size = q.size(); // 获取队列中的元素个数
+4. swap(): 交换两个优先队列的内容。
+```

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cstring>
+#include <queue> //堆（使用优先队列的）
 #include <iomanip> //保留几位小数所需
 #include <vector>
 using namespace std;
@@ -95,6 +96,12 @@ using namespace std;
 //     // for(auto &c:x){
 //     //     c='x';
 //     // }
+//     string b("asADfaq");
+//     if(x.find(b)!=string ::npos){
+//         cout << "yes"<<endl;
+//     }else{
+//         cout << "no"<<endl;
+//     }
 //     int i=0;
 //     cout << i << " another "<< ++i<<endl;
 //     cout << x<<endl;
@@ -102,16 +109,33 @@ using namespace std;
 //     return 0;
 // }
 
+void res(int *a){
+    a=0;
+}
+int main(){
+    vector<int> aln;
+    for(int i=0;i<2;i++){
+        aln.push_back(i);
+    }
+    int i=42;
+    res(&i);
+    cout<< "i="<<i<<endl;
+    auto x=aln.end();
+    cout <<"x= "<< *x <<endl;
+    for(auto i=aln.begin();i<=aln.end();i++){
+        cout <<"num="<< aln[*i]<<endl;
+    }
+    return 0;
+}
+
+// 堆
 // int main(){
-//     vector<int> aln;
-//     for(int i=0;i<2;i++){
-//         aln.push_back(i);
-//     }
-//     auto x=aln.end();
-//     cout <<"x= "<< *x <<endl;
-//     for(auto i=aln.begin();i<=aln.end();i++){
-//         cout <<"num="<< aln[*i]<<endl;
-//     }
+//     priority_queue<int> q; 
+//     q.push(10); //在使用push操作时可自动将最大的数防到堆
+//     q.push(5);
+//     q.push(50);
+//     cout << "max num is "<< q.top()<<endl;
+//     q.pop();
+//     cout << "new max num is "<< q.top()<<endl;
 //     return 0;
 // }
-
