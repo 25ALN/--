@@ -229,6 +229,10 @@ int i=1;
 int &j=i; 可以认为j是i的另外一个名字
 i与j的类型必须相同且像 int &j=1;这种是无效的必须是个对象
 
+### 函数
+若函数有多个参数，但只传入了少于该函数的参数个数，该函数后面的参数为默认值
+- 重载函数(main函数除外)
+几个函数名字相同但参数列表不同
 ### 输入与输出
 - 输入
 cin >> 直接跟上变量
@@ -296,6 +300,22 @@ std::unordered_map<key_type, value_type> map_name;
 //value_type 是值的类型。
 ```
 其中每个键值都是唯一的
+- std::min_element 
+是一个用于查找范围内最小元素的标准库算法，位于 <algorithm> 头文件中。
+```c
+auto minIt = std::min_element(vec.begin(), vec.end());
+```
+-Lambda 表达式
+一种匿名函数（没有名字的函数）
+```c
+[capture](parameter_list) -> return_type { function_body }
+```
+各个部分含义
+部分	               含义	                  备注
+[]	            捕获列表，捕获外部变量	      可以捕获局部变量、对象成员等
+(parameter_list)	参数列表，类似于普通函数	   可以省略参数
+-> return_type 	返回类型	            如果能推断，可以省略
+{ function_body }	函数体，执行逻辑  	   必须写在花括号中
 #### string类
 可以互相拼接，赋值(用+，-，=)
 - size()：返回字符串的长度。
@@ -316,7 +336,7 @@ std::string::npos 的值通常是 -1 或 ~0（即所有位都为 1），在实�
 ### 堆的c++(优先队列)
 需包含头文件#include <queue>
 priority_queue<int> q;（大顶堆，在使用push操作时将大数放在堆顶）
-priority_queue<int,vector<int>,greater<int>> minHeap;（小堆顶） 
+priority_queue< int,vector<int>,greater<int> > minHeap;（小堆顶） 
 ```c
 1. top(): 返回优先队列中优先级最高的元素（即最大元素）。如果队列为空，调用 top() 会导致未定义行为，因此在调用前最好先检查队列是否为空。
 int top_element = q.top(); // 获取队列中优先级最高的元素
@@ -328,3 +348,4 @@ if (q.empty()) {
 int size = q.size(); // 获取队列中的元素个数
 4. swap(): 交换两个优先队列的内容。
 ```
+244

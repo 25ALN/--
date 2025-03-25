@@ -109,24 +109,24 @@ using namespace std;
 //     return 0;
 // }
 
-void res(int *a){
-    a=0;
-}
-int main(){
-    vector<int> aln;
-    for(int i=0;i<2;i++){
-        aln.push_back(i);
-    }
-    int i=42;
-    res(&i);
-    cout<< "i="<<i<<endl;
-    auto x=aln.end();
-    cout <<"x= "<< *x <<endl;
-    for(auto i=aln.begin();i<=aln.end();i++){
-        cout <<"num="<< aln[*i]<<endl;
-    }
-    return 0;
-}
+// void res(int *a){
+//     a=0;
+// }
+// int main(){
+//     vector<int> aln;
+//     for(int i=0;i<2;i++){
+//         aln.push_back(i);
+//     }
+//     int i=42;
+//     res(&i);
+//     cout<< "i="<<i<<endl;
+//     auto x=aln.end();
+//     cout <<"x= "<< *x <<endl;
+//     for(auto i=aln.begin();i<=aln.end();i++){
+//         cout <<"num="<< aln[*i]<<endl;
+//     }
+//     return 0;
+// }
 
 // 堆
 // int main(){
@@ -139,3 +139,32 @@ int main(){
 //     cout << "new max num is "<< q.top()<<endl;
 //     return 0;
 // }
+
+//递归输出vector对象的内容
+// void print(vector <int> &shuchu,size_t len=0){//该函数的第二个参数为默认值
+//     if(len>=shuchu.size()){
+//         return;
+//     }
+//     cout <<shuchu[len]<<" "<<endl;
+//     print(shuchu,len+1);
+// }
+// int main(){
+//     vector <int> num{1,2,3,4,5};
+//     print(num);
+//     return 0;
+// }
+
+//重载函数
+void print(int val);
+void print(double val);
+int main(){
+    print(10);
+    print(10.29);
+    return 0;
+}
+void print(int val){
+    cout << "int num is "<<val<<endl;
+}
+void print(double val){
+    cout<<"double num is "<<val<<endl;
+}
