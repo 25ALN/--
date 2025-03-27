@@ -321,6 +321,7 @@ auto minIt = std::min_element(vec.begin(), vec.end());
 { function_body }	函数体，执行逻辑  	   必须写在花括号中
 #### string类
 可以互相拼接，赋值(用+，-，=)
+string赋值方法详见c++ p书321页
 - size()：返回字符串的长度。
 - empty()：检查字符串是否为空。
 - operator[]：通过索引访问字符串中的字符。
@@ -332,9 +333,52 @@ auto minIt = std::min_element(vec.begin(), vec.end());
 std::string::npos 的值通常是 -1 或 ~0（即所有位都为 1），在实际中它是一个无符号整数的最大值 (std::string::size_type)。
 它的作用是指示未找到的情况。是一个特殊的常量
 在 std::string::find() 等查找函数中，如果目标子字符串不存在，就会返回 std::string::npos。
+
+#### std::ranges::sort(排序函数) 
+**不支持原生数组，只能对像vector,list这样的容器进行排序**
+```c
+std::ranges::sort(range, comparator, projection);
+```
+- range
+需要排序的范围，可以是数组、向量 (std::vector)、列表 (std::list) 等容器。
+- comparator（可选）
+自定义比较函数，用于指定排序的方式，类似于 std::sort 的第三个参数。默认为 std::ranges::less，即升序排序。
+若想降序排列则将此参数设为 std::ranges::greater{}
+- projection（可选）
+投影函数，用于对元素进行预处理后再进行比较。它类似于对数据执行某种转换再排序的过程。
+经典的投影函数 **[](auto& t) { return t[0]; }** 
+当有一个二维数组，想以每个元素的第一个数进行排序时，就加入这个投影函数
+
 ### vector(容器)
 {}代表着赋值,()则是一种初始化；
-不能通过下标去进行初始化，应当使用push_back()
+不能通过下标去进行初始化，应当使用push_back()，或者使用emplace_back()(这个相比于push_back是原地构造，效率较高)
+- insert(用于在指定位置插入元素，非常的灵活)
+```c
+
+int main(){
+   list<int> L;
+   for(size_t i=1;i<=5;i++){
+      L.push_front(i);//依次将元素插入到头部
+   }
+   auto pos=L.begin();
+   advance(pos,3); //(此函数可将迭代器向前或向后移动相应的步数)
+   L.insert(pos,42);//(代表着在pos位置处插入42这个数字)
+   for(auto &x:L){
+      cout << x <<" ";
+   }
+   return 0;
+}
+```
+#### 删除操作
+forward list 有特殊版本的 erase,参见9.3.4节(第312页)。
+forward_list 不支持 pop_back; vector 和 string 不支持 pop_front。
+c.pop_back() 删除中尾元素。若为空,则函数行为未定义。函数返回void
+c.pop_front() 删除c中首元素。若为空,则函数行为未定义。函数返回void
+c.erase (p) 删除迭代器 p所指定的元素,返回一个指向被删元素之后元素的迭代器,若p指向尾元素
+,则返回尾后(off-the-end)迭代器。若是尾后迭代器,则函数行为未定义
+c.erase (b,e) 删除迭代器和e所指定范围内的元素。返回一个指向最后一个被删元素之后元素的迭代器,
+若e本身就是尾后迭代器,则函数也返回尾后迭代器
+c.clear() 删除中的所有元素。返回void
 
 ### 堆的c++(优先队列)
 需包含头文件#include <queue>

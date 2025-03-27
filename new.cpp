@@ -3,7 +3,11 @@
 #include <cstring>
 #include <queue> //堆（使用优先队列的）
 #include <iomanip> //保留几位小数所需
+#include <list>
+#include <deque>
 #include <vector>
+#include <algorithm>
+#include <ranges> //sort排序
 using namespace std;
 // using std::string; 
 // int main(){
@@ -155,16 +159,93 @@ using namespace std;
 // }
 
 //重载函数
-void print(int val);
-void print(double val);
+// void print(int val);
+// void print(double val);
+// int main(){
+//     print(10);
+//     print(10.29);
+//     return 0;
+// }
+// void print(int val){
+//     cout << "int num is "<<val<<endl;
+// }
+// void print(double val){
+//     cout<<"double num is "<<val<<endl;
+// }
+
+// int main(){
+//     list<int> L;
+//     for(size_t i=1;i<=5;i++){
+//         L.push_front(i);//依次将元素插入到头部
+//     }
+//     auto pos=L.begin();
+//     advance(pos,3);
+//     L.insert(pos,42);
+//     for(auto &x:L){
+//         cout << x <<" ";
+//     }
+//     return 0;
+// }
+
+//将读取的string序列存入一个deque中，并用迭代器打印结果
+// int main(){
+//     vector <string> x;
+//     string str;
+//     while(cin >> str){
+//         x.push_back(str);
+//     }
+//     deque<string> y;
+//     for(auto mid:x){
+//         y.push_front(mid);
+//     }
+//     y.pop_back();
+//     for(auto n:y){
+//         cout << n<<" ";
+//     }
+//     return 0;
+// }
+
+//删除元素练习
+
 int main(){
-    print(10);
-    print(10.29);
+    int ia[]={0,1,1,2,3,5,8,13,21,55,89};
+    vector <int >x;
+    list <int > y;
+    size_t len=sizeof(ia)/sizeof(ia[0]);
+    for(int i=0;i<len;i++){
+        x.push_back(ia[i]);
+    }
+    for(int i=0;i<len;i++){
+        y.push_back(ia[i]);
+    }
+    for(int i=0;i<len;i++){
+        cout << ia[i]<<" ";
+    }
+    printf("\n");
+    //删除偶数
+    auto ou=x.begin();
+    while(ou!=x.end()){
+        if((*ou)%2==1){
+            ou=x.erase(ou); //erase() 会 删除当前迭代器指向的元素，并返回 下一个有效迭代器，因此需要用ou保存指向下一个的指针
+        }else{
+            ou++;
+        }
+    }
+    //删除奇数
+    auto ji=y.begin();
+    while(ji!=y.end()){
+        if(*ji%2==0){
+            ji=y.erase(ji);
+        }else{
+            ji++;
+        }
+    }
+    for(auto s:x){
+        cout << s<<" ";
+    }
+    printf("\n");
+    for(auto S:y){
+        cout << S<<" ";
+    }
     return 0;
-}
-void print(int val){
-    cout << "int num is "<<val<<endl;
-}
-void print(double val){
-    cout<<"double num is "<<val<<endl;
 }
