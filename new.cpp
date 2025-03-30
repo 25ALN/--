@@ -6,7 +6,8 @@
 #include <list>
 #include <deque>
 #include <vector>
-#include <algorithm>
+#include <numeric> //与算法相关
+#include <algorithm> //大部分的泛型算法所在
 #include <ranges> //sort排序
 using namespace std;
 // using std::string; 
@@ -207,45 +208,84 @@ using namespace std;
 
 //删除元素练习
 
-int main(){
-    int ia[]={0,1,1,2,3,5,8,13,21,55,89};
-    vector <int >x;
-    list <int > y;
-    size_t len=sizeof(ia)/sizeof(ia[0]);
-    for(int i=0;i<len;i++){
-        x.push_back(ia[i]);
-    }
-    for(int i=0;i<len;i++){
-        y.push_back(ia[i]);
-    }
-    for(int i=0;i<len;i++){
-        cout << ia[i]<<" ";
-    }
-    printf("\n");
-    //删除偶数
-    auto ou=x.begin();
-    while(ou!=x.end()){
-        if((*ou)%2==1){
-            ou=x.erase(ou); //erase() 会 删除当前迭代器指向的元素，并返回 下一个有效迭代器，因此需要用ou保存指向下一个的指针
-        }else{
-            ou++;
-        }
-    }
-    //删除奇数
-    auto ji=y.begin();
-    while(ji!=y.end()){
-        if(*ji%2==0){
-            ji=y.erase(ji);
-        }else{
-            ji++;
-        }
-    }
-    for(auto s:x){
-        cout << s<<" ";
-    }
-    printf("\n");
-    for(auto S:y){
-        cout << S<<" ";
-    }
-    return 0;
-}
+// int main(){
+//     int ia[]={0,1,1,2,3,5,8,13,21,55,89};
+//     vector <int >x;
+//     list <int > y;
+//     size_t len=sizeof(ia)/sizeof(ia[0]);
+//     for(int i=0;i<len;i++){
+//         x.push_back(ia[i]);
+//     }
+//     for(int i=0;i<len;i++){
+//         y.push_back(ia[i]);
+//     }
+//     for(int i=0;i<len;i++){
+//         cout << ia[i]<<" ";
+//     }
+//     printf("\n");
+//     //删除偶数
+//     auto ou=x.begin();
+//     while(ou!=x.end()){
+//         if((*ou)%2==1){
+//             ou=x.erase(ou); //erase() 会 删除当前迭代器指向的元素，并返回 下一个有效迭代器，因此需要用ou保存指向下一个的指针
+//         }else{
+//             ou++;
+//         }
+//     }
+//     int sum=accumulate(x.cbegin(),x.cend(),0); //求和函数
+//     cout << "vector sum is "<< sum<<endl;
+//     //删除奇数
+//     auto ji=y.begin();
+//     while(ji!=y.end()){
+//         if(*ji%2==0){
+//             ji=y.erase(ji);
+//         }else{
+//             ji++;
+//         }
+//     }
+//     for(auto s:x){
+//         cout << s<<" ";
+//     }
+//     printf("\n");
+//     for(auto S:y){
+//         cout << S<<" ";
+//     }
+//     return 0;
+// }
+
+//lambda
+
+// int main(){
+//     int a=5,b=10;
+//     auto jia=[](int a,int b)-> int {return a+b;};
+//     auto test1=[=](){
+//         cout<< "a="<<a<<" b= "<<b<<endl;
+//     };
+//     auto test2=[&a,&b](){  //
+//         a+=5;
+//         b+=10;
+//         cout<< "a="<<a<<" b= "<<b<<endl;
+//     };
+//     cout << "jia="<<jia(a,b);
+//     test1();
+//     test2();
+//     test1();
+//     return 0;
+// }
+
+// int main(){
+//     int n;
+//     cin >> n;
+//     auto dijian=[&]()->int {
+//     while(n>0)
+//     n--;
+//     return n;
+//     };
+//     while(n>0){
+//         int x=0;
+//         dijian();
+//         cout << ++x<< endl;
+//     }
+//     cout << n;
+//     return 0;
+// }

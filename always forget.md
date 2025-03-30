@@ -333,6 +333,8 @@ string赋值方法详见c++ p书321页
 std::string::npos 的值通常是 -1 或 ~0（即所有位都为 1），在实际中它是一个无符号整数的最大值 (std::string::size_type)。
 它的作用是指示未找到的情况。是一个特殊的常量
 在 std::string::find() 等查找函数中，如果目标子字符串不存在，就会返回 std::string::npos。
+- 搜索操作(例如查找字符串位置的)
+见c++书 325页
 
 #### std::ranges::sort(排序函数) 
 **不支持原生数组，只能对像vector,list这样的容器进行排序**
@@ -346,8 +348,16 @@ std::ranges::sort(range, comparator, projection);
 若想降序排列则将此参数设为 std::ranges::greater{}
 - projection（可选）
 投影函数，用于对元素进行预处理后再进行比较。它类似于对数据执行某种转换再排序的过程。
-经典的投影函数 **[](auto& t) { return t[0]; }** 
+经典的投影函数 **[](auto& t) { return t[0]; }**(其实就是一个lambda)
 当有一个二维数组，想以每个元素的第一个数进行排序时，就加入这个投影函数
+
+#### lambda(如果在一两个地方使用的简单操作使用它比函数更好)
+- [capture](parameters) -> return_type { body }
+[capture]：捕获外部变量的方式。
+[=]是值捕获，不会改变值或是获取到改变的值；[&]引用捕获，字面意思
+(parameters)：参数列表（可以省略）。
+-> return_type：返回类型（通常可以省略）。
+{ body }：函数体。
 
 ### vector(容器)
 {}代表着赋值,()则是一种初始化；
