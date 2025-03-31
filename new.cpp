@@ -289,3 +289,79 @@ using namespace std;
 //     cout << n;
 //     return 0;
 // }
+
+// int main(){
+//     vector <int> num{ 1, 2, 3, 4, 5, 10, 15, 20, 25, 35, 45, 50 };
+//     int sum=0;
+//     for_each(num.begin(),num.end(),[&sum](const int &i){sum+=i;});
+//     for_each(num.begin(),num.end(),[&sum](int &j){if(j%5==0){
+//         cout<<j<<" ";
+//     }});
+//     printf("\n");
+//     for_each(num.begin(),num.end(),[&sum](int &j){if(j%10==0){
+//         cout<<j<<" ";
+//     }});
+//     printf("\n");
+//     cout<<sum<<endl;
+//     return 0;
+// }
+
+//矩阵相乘
+
+vector<vector <int> > jzcsh(int r,int l);
+int *makehl(int temp[2]);
+vector<vector <int> > xc(const vector<vector <int> >&a,const vector<vector <int> >&b);//传入const防止修改，&只是引用效率更快
+void print(vector <vector<int>> s);
+int main(){
+    int row=0,line=0,*t;
+    t=new int[2];
+    int num=0;
+    t=makehl(t);
+    row=t[0],line=t[1];
+    vector<vector <int>> x1=jzcsh(row,line);
+    cout<<"please a new line:";
+    cin>>row;
+    vector<vector <int>> x2=jzcsh(line,row);
+    vector <vector<int>>out=xc(x1,x2);
+    cout<<"new jz is"<<endl;
+    print(out);
+    delete t;
+    return 0;   
+}
+int *makehl(int temp[2]){
+    cout<<"please enter row and line ";
+    cin>>temp[0];
+    cin>>temp[1];
+    return temp;
+}
+vector<vector <int> > jzcsh(int r,int l){
+    vector<vector<int>> s(r,vector<int>(l));
+    cout<<"please enter "<<r<<" row "<<l<<" line numbers"<<endl;
+    for(int i=0;i<r;i++){
+        for(int j=0;j<l;j++){
+            cin>>s[i][j];
+        }
+    }
+    return s;
+}
+
+vector<vector <int> > xc(const vector<vector <int> >&a,const vector<vector <int> >&b){
+    vector<vector<int> >out(a.size(),vector<int>(b[0].size()));
+    for(int i=0;i<a.size();i++){
+        for(int j=0;j<a[i].size();j++){
+            for(int k=0;k<b[0].size();k++){
+                out[i][k]+=a[i][j]*b[j][k];
+            }
+        }
+    }
+    return out;
+}
+
+void print(vector <vector<int>> s){
+    for(int i=0;i<s.size();i++){
+        for(int j=0;j<s[i].size();j++){
+            cout<<s[i][j]<<" ";
+        }
+        printf("\n");
+    }
+}
