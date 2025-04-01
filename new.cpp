@@ -306,62 +306,108 @@ using namespace std;
 //     return 0;
 // }
 
+//构造函数
+// class line{
+// public:
+//     double bmi(double x,double y);
+//     int kj(int l);
+//     line();
+//     ~line();
+// private:
+//     double num;
+//     double len;
+// };
+// line::line():num(0),len(0){
+//     cout<<"success"<<endl;
+// };
+// line::~line(){
+//     cout<<"hanshujies"<<endl;
+// }
+// double line::bmi(double x,double y){
+//     num=(x*y)/(x+y);
+//     return num;
+// }
+// int line::kj(int l){
+//     len=l;
+//     return len;
+// }
+// int main(){
+//     line p;
+//     cout<<p.bmi(1.1,2.3)<<endl;
+//     int q=p.kj(5);
+//     cout<<"q="<<q<<endl;
+//     return 0;
+// }
+
+//可变参数模板
+template <typename F,typename...Args>//typename可以是int,double，函数或者指针都行（具体看使用），
+//...Args是一个参数包，可传入多个参数
+void a(F fun,Args...args){
+    fun(args...); //展开参数包，接受其中的多个参数
+}
+void print(int x,int y){
+    cout<<"x="<<x<<" y="<<y;
+}
+int main(){
+    a(print,2,3);
+    return 0;
+}
 //矩阵相乘
 
-vector<vector <int> > jzcsh(int r,int l);
-int *makehl(int temp[2]);
-vector<vector <int> > xc(const vector<vector <int> >&a,const vector<vector <int> >&b);//传入const防止修改，&只是引用效率更快
-void print(vector <vector<int>> s);
-int main(){
-    int row=0,line=0,*t;
-    t=new int[2];
-    int num=0;
-    t=makehl(t);
-    row=t[0],line=t[1];
-    vector<vector <int>> x1=jzcsh(row,line);
-    cout<<"please a new line:";
-    cin>>row;
-    vector<vector <int>> x2=jzcsh(line,row);
-    vector <vector<int>>out=xc(x1,x2);
-    cout<<"new jz is"<<endl;
-    print(out);
-    delete t;
-    return 0;   
-}
-int *makehl(int temp[2]){
-    cout<<"please enter row and line ";
-    cin>>temp[0];
-    cin>>temp[1];
-    return temp;
-}
-vector<vector <int> > jzcsh(int r,int l){
-    vector<vector<int>> s(r,vector<int>(l));
-    cout<<"please enter "<<r<<" row "<<l<<" line numbers"<<endl;
-    for(int i=0;i<r;i++){
-        for(int j=0;j<l;j++){
-            cin>>s[i][j];
-        }
-    }
-    return s;
-}
+// vector<vector <int> > jzcsh(int r,int l);
+// int *makehl(int temp[2]);
+// vector<vector <int> > xc(const vector<vector <int> >&a,const vector<vector <int> >&b);//传入const防止修改，&只是引用效率更快
+// void print(vector <vector<int>> s);
+// int main(){
+//     int row=0,line=0,*t;
+//     t=new int[2];
+//     int num=0;
+//     t=makehl(t);
+//     row=t[0],line=t[1];
+//     vector<vector <int>> x1=jzcsh(row,line);
+//     cout<<"please a new line:";
+//     cin>>row;
+//     vector<vector <int>> x2=jzcsh(line,row);
+//     vector <vector<int>>out=xc(x1,x2);
+//     cout<<"new jz is"<<endl;
+//     print(out);
+//     delete t;
+//     return 0;   
+// }
+// int *makehl(int temp[2]){
+//     cout<<"please enter row and line ";
+//     cin>>temp[0];
+//     cin>>temp[1];
+//     return temp;
+// }
+// vector<vector <int> > jzcsh(int r,int l){
+//     vector<vector<int>> s(r,vector<int>(l));
+//     cout<<"please enter "<<r<<" row "<<l<<" line numbers"<<endl;
+//     for(int i=0;i<r;i++){
+//         for(int j=0;j<l;j++){
+//             cin>>s[i][j];
+//         }
+//     }
+//     return s;
+// }
 
-vector<vector <int> > xc(const vector<vector <int> >&a,const vector<vector <int> >&b){
-    vector<vector<int> >out(a.size(),vector<int>(b[0].size()));
-    for(int i=0;i<a.size();i++){
-        for(int j=0;j<a[i].size();j++){
-            for(int k=0;k<b[0].size();k++){
-                out[i][k]+=a[i][j]*b[j][k];
-            }
-        }
-    }
-    return out;
-}
+// vector<vector <int> > xc(const vector<vector <int> >&a,const vector<vector <int> >&b){
+//     vector<vector<int> >out(a.size(),vector<int>(b[0].size()));
+//     for(int i=0;i<a.size();i++){
+//         for(int j=0;j<a[i].size();j++){
+//             for(int k=0;k<b[0].size();k++){
+//                 out[i][k]+=a[i][j]*b[j][k];
+//             }
+//         }
+//     }
+//     return out;
+// }
 
-void print(vector <vector<int>> s){
-    for(int i=0;i<s.size();i++){
-        for(int j=0;j<s[i].size();j++){
-            cout<<s[i][j]<<" ";
-        }
-        printf("\n");
-    }
-}
+// void print(vector <vector<int>> s){
+//     for(int i=0;i<s.size();i++){
+//         for(int j=0;j<s[i].size();j++){
+//             cout<<s[i][j]<<" ";
+//         }
+//         printf("\n");
+//     }
+// }
