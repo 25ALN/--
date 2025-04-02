@@ -5,10 +5,12 @@
 #include <iomanip> //保留几位小数所需
 #include <list>
 #include <deque>
+#include <thread> //线程
 #include <vector>
 #include <numeric> //与算法相关
 #include <algorithm> //大部分的泛型算法所在
 #include <ranges> //sort排序
+
 using namespace std;
 // using std::string; 
 // int main(){
@@ -340,18 +342,34 @@ using namespace std;
 // }
 
 //可变参数模板
-template <typename F,typename...Args>//typename可以是int,double，函数或者指针都行（具体看使用），
-//...Args是一个参数包，可传入多个参数
-void a(F fun,Args...args){
-    fun(args...); //展开参数包，接受其中的多个参数
-}
-void print(int x,int y){
-    cout<<"x="<<x<<" y="<<y;
-}
-int main(){
-    a(print,2,3);
-    return 0;
-}
+
+// template <typename F,typename...Args>//typename可以是int,double，函数或者指针都行（具体看使用），
+// //...Args是一个参数包，可传入多个参数
+// void a(F fun,Args...args){
+//     fun(args...); //展开参数包，接受其中的多个参数
+// }
+// void print(int x,int y){
+//     cout<<"x="<<x<<" y="<<y;
+// }
+// int main(){
+//     a(print,2,3);
+//     return 0;
+// }
+//运用该模板求和（采用了递归来解析这个参数包）
+// template <typename T>
+// T print(T t){
+//     return t;
+// }
+// template <typename T,typename...args>
+// T print(T f,args...r){
+//     return f+print<T>(r...);//如果不写 sum<T>(rest...)，而是 sum(rest...)
+//     //编译器可能会尝试推导不同的 T，导致推导失败或引发意外的类型转换错误
+// }
+// int main(){
+//     cout<<print(1,2,3,4);
+//     return 0;
+// }
+
 //矩阵相乘
 
 // vector<vector <int> > jzcsh(int r,int l);
@@ -411,3 +429,5 @@ int main(){
 //         printf("\n");
 //     }
 // }
+
+//threadpool
