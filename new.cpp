@@ -10,6 +10,10 @@
 #include <numeric> //与算法相关
 #include <algorithm> //大部分的泛型算法所在
 #include <ranges> //sort排序
+#include <mutex>  //锁
+#include <condition_variable> //条件变量，用于同步线程之间的
+#include <functional> 
+#include <future>  //期物，用于同步线程的
 
 using namespace std;
 // using std::string; 
@@ -430,4 +434,25 @@ using namespace std;
 //     }
 // }
 
+// thread
+// void print(int a,int b){
+//     cout<<a+b<<endl;
+// }
+// int main(){
+//     thread s1(print,2,3);
+//     s1.join();
+//     return 0;
+// }
 //threadpool
+class threadpool{
+public:
+    explicit threadpool(size_t threadnum=std::thread::hardware_concurrency()):stop(false){
+    //std::thread::hardware_concurrency()可返回系统上可以执行的最大线程数，，通常是CPU核心数
+    for(int i=0;i<threadnum;i++){
+        
+    }
+    }
+private:
+    bool stop;//用来控制线程池是否停止运行的标志。初始化为 false 表示线程池默认情况下是启动的。
+    
+}
