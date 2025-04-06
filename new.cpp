@@ -443,16 +443,37 @@ using namespace std;
 //     s1.join();
 //     return 0;
 // }
+
 //threadpool
+
 class threadpool{
 public:
     explicit threadpool(size_t threadnum=std::thread::hardware_concurrency()):stop(false){
     //std::thread::hardware_concurrency()可返回系统上可以执行的最大线程数，，通常是CPU核心数
-    for(int i=0;i<threadnum;i++){
+        for(int i=0;i<threadnum;i++){
+            s.emplace_back([this](){ //lambda的构建捕获this后就可调用这个类中的各个成员
+                while(true){ //除非输入相应的信号否则一直处理任务队列
+                    std::function<void()> task;
+                    std::unique_lock<std::mutex> lock(this->qmutex);
+                    this->qc.wait(lock,[this](){
+                        return this->stop==true||!this->tasks.empty();
+                    });
+                    if(this->stop&&this->tasks.empty()){
+                        return;
+                    }
+                    task=std::move(this->tasks.front()); //加上move后效率更高，移动赋值，避免不必要的拷贝
+                    this->tasks.pop();
+                    task(); //开始执行
+                }
+            });
+        }
+
         
-    }
     }
 private:
     bool stop;//用来控制线程池是否停止运行的标志。初始化为 false 表示线程池默认情况下是启动的。
-    
-}
+    std::vector<std::thread> s;
+    std::mutex qmutex;
+    std::condition_variable qc;
+    std::queue<std::function<void()> > tasks;
+};
