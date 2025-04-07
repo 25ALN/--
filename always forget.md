@@ -313,7 +313,8 @@ std::unordered_map<key_type, value_type> map_name;
 ```c
 auto minIt = std::min_element(vec.begin(), vec.end());
 ```
--Lambda 表达式
+
+- Lambda 表达式
 一种匿名函数（没有名字的函数）
 ```c
 [capture](parameter_list) -> return_type { function_body }
@@ -324,6 +325,11 @@ auto minIt = std::min_element(vec.begin(), vec.end());
 (parameter_list)	参数列表，类似于普通函数	   可以省略参数
 -> return_type 	返回类型	            如果能推断，可以省略
 { function_body }	函数体，执行逻辑  	   必须写在花括号中
+
+- std::function
+类模版std::function是一种通用、多态的函数封装。std::function的实例可以对任何可以调用的目标实体
+进行存储、复制、和调用操作，这些目标实体包括普通函数、Lambda表达式、函数指针、以及其它函数对象等
+std::function对象最大的用处就是在实现函数回调
 #### string类
 可以互相拼接，赋值(用+，-，=)
 string赋值方法详见c++ p书321页

@@ -350,6 +350,7 @@ using namespace std;
 // template <typename F,typename...Args>//typename可以是int,double，函数或者指针都行（具体看使用），
 // //...Args是一个参数包，可传入多个参数
 // void a(F fun,Args...args){
+//     using return_type=std::invoke_result_t<F,args...>;
 //     fun(args...); //展开参数包，接受其中的多个参数
 // }
 // void print(int x,int y){
@@ -359,7 +360,9 @@ using namespace std;
 //     a(print,2,3);
 //     return 0;
 // }
+
 //运用该模板求和（采用了递归来解析这个参数包）
+
 // template <typename T>
 // T print(T t){
 //     return t;
@@ -371,6 +374,24 @@ using namespace std;
 // }
 // int main(){
 //     cout<<print(1,2,3,4);
+//     return 0;
+// }
+
+// template <typename T>
+// bool compare(const T &a,const T &b){
+//     return a>b;
+// }
+// int main(){
+//     double a=13.12;
+//     double b=21.68;
+//     using return_type=std::invoke_result_t<decltype(compare<double>),double,double>;
+//     return_type x=2;
+//     cout<<"x="<<x<<endl;
+//     if(compare(a,b)){
+//         cout<<"a is big";
+//     }else{
+//         cout<<"b is big";
+//     }
 //     return 0;
 // }
 
@@ -411,6 +432,17 @@ using namespace std;
 //         }
 //     }
 //     return s;
+// }
+
+//bind(用来绑定其他函数，用来改造)
+// using namespace std::placeholders;//加上这个后才能使用_4,_1这样的占位符
+// int add(int a,int b){
+//     return a+b;
+// }
+// int main(){
+//     auto f=std::bind(&add,_4,_2); //指定传入的参数为第四个和第二个
+//     cout<<f(1,2,3,5,5,6)<<endl;
+//     return 0;
 // }
 
 // vector<vector <int> > xc(const vector<vector <int> >&a,const vector<vector <int> >&b){
@@ -454,22 +486,24 @@ public:
             s.emplace_back([this](){ //lambda的构建捕获this后就可调用这个类中的各个成员
                 while(true){ //除非输入相应的信号否则一直处理任务队列
                     std::function<void()> task;
-                    std::unique_lock<std::mutex> lock(this->qmutex);
-                    this->qc.wait(lock,[this](){
-                        return this->stop==true||!this->tasks.empty();
-                    });
-                    if(this->stop&&this->tasks.empty()){
-                        return;
+                    {
+                        std::unique_lock<std::mutex> lock(this->qmutex);
+                        this->qc.wait(lock,[this](){
+                            return this->stop==true||!this->tasks.empty();
+                        });
+                        if(this->stop&&this->tasks.empty()){
+                            return;
+                        }
+                        task=std::move(this->tasks.front()); //加上move后效率更高，移动赋值，避免不必要的拷贝
+                        this->tasks.pop();
                     }
-                    task=std::move(this->tasks.front()); //加上move后效率更高，移动赋值，避免不必要的拷贝
-                    this->tasks.pop();
+                    //将锁规定在一个作用域内，离开后会自动解锁，这样可以防止锁住执行时间长的任务
                     task(); //开始执行
                 }
             });
         }
-
-        
     }
+
 private:
     bool stop;//用来控制线程池是否停止运行的标志。初始化为 false 表示线程池默认情况下是启动的。
     std::vector<std::thread> s;
