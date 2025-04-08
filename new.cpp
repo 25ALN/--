@@ -68,6 +68,16 @@ using namespace std;
 //     return 0;
 // }
 
+// int main(){
+//     vector<int >s{4,8,3,1,9,2};
+//     sort(s.begin(),s.end());
+//     for(auto &i:s){
+//         cout<<i<<" ";
+//     }
+//     printf("\n");
+//     cout<<s[2];
+//     return 0;
+// }
 // 题目
 //1.
 // int main(){
@@ -467,6 +477,17 @@ using namespace std;
 // }
 
 // thread
+
+// int main(){
+//     int a=5;
+//     int &zuo=a;
+//     int &&you=std::move(a);
+//     cout<<zuo<<endl;
+//     cout<<"you="<<you<<endl;
+//     cout<<"location is "<<&a<<" "<<&zuo<<" "<<&you; //地址都相同
+//     return 0;
+// }
+
 // void print(int a,int b){
 //     cout<<a+b<<endl;
 // }
@@ -478,6 +499,7 @@ using namespace std;
 
 //threadpool
 
+using return_type=vector<vector<double>>;
 class threadpool{
 public:
     explicit threadpool(size_t threadnum=std::thread::hardware_concurrency()):stop(false){
@@ -503,7 +525,30 @@ public:
             });
         }
     }
-
+    template<typename F,typename ...args>
+    auto queuetasks(F,args...){
+        auto task=make_shared<std::packaged_task<return_type()>>(jz);
+        std::future<return_type> r=task->get_future();
+        {
+            std::unique_lock<std::mutex> lock(qmutex);
+            if(stop){
+                cout<<"task alread end"<<endl;;
+            }
+            tasks.emplace(std::move(task));
+        }
+        qc.notify_one();
+        return r;
+    }
+    ~threadpool(){
+        {
+            std::unique_lock<std::mutex> lock(qmutex);
+            stop=true;  
+        }
+        qc.notify_all(); //唤醒所有线程，准备清理掉
+        for(std::thread &deal:s){
+            deal.join();
+        }
+    }
 private:
     bool stop;//用来控制线程池是否停止运行的标志。初始化为 false 表示线程池默认情况下是启动的。
     std::vector<std::thread> s;
@@ -511,3 +556,10 @@ private:
     std::condition_variable qc;
     std::queue<std::function<void()> > tasks;
 };
+int main(){
+    threadpool jzxc;
+    return_type x1={{1,2},{3,4}};  
+    return_type x2={{5,6},{7,7}};
+    jzxc.queuetasks(x1,x2);  
+    return 0;
+}
