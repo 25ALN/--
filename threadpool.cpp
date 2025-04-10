@@ -37,9 +37,9 @@ public:
     }
 
     template<typename F,typename hd=std::function<void(return_type)>>
-    auto queuetasks(F&&f,return_type a,return_type b,hd data=nullptr){ //定义了一个参数获取回调的东西
+    auto queuetasks(F&&f,std::vector<return_type> q,hd data=nullptr){ //定义了一个参数获取回调的东西
         auto task=std::make_shared<std::packaged_task<return_type()>>([=](){  //对任务进行封装
-            return f(a,b);
+            return f(q);
         }); 
         std::future<return_type> r=task->get_future();
         {
@@ -77,51 +77,34 @@ private:
 };
 
 return_type work(const return_type&A,const return_type&B);
+return_type break_jz(std::vector<return_type> m);
 
-int main() {
-    threadpool pool; // 默认10线程
-    return_type x1 = {{1, 2}, {3, 4}};
-    return_type x2 = {{5, 6}, {7, 8}};
-
-    std::vector<std::future<return_type>> futures;
-
-    // 提交多个任务
-    for (int i = 0; i < 10; ++i) {
-        auto f = pool.queuetasks(work, x1, x2, [i](const return_type& result) {
-            std::cout << "[Callback] Task " << i << " result:\n";
-            for (const auto& row : result) {
-                for (auto val : row) {
-                    std::cout << val << " ";
-                }
-                std::cout << "\n";
-            }
-            std::cout << "------------------------\n";
-        });
-        futures.push_back(std::move(f));
+int main(){
+    threadpool jzxc;
+    return_type x1={{1,2},{3,4}};  
+    return_type x2={{5,6},{7,8}};
+    return_type x3={{2,2},{2,2}};
+    std::vector<return_type> jzs={x1,x2,x3};
+    auto ans=jzxc.queuetasks(break_jz,jzs);
+    return_type o=ans.get();
+    for(auto &x:o){
+        for(auto y:x){
+            std::cout<<y<<" ";
+        }
+        printf("\n");
     }
-
-    // 等待所有任务完成
-    for (auto& f : futures) {
-        f.get(); // 结果已在回调中输出，这里只是确保同步完成
-    }
-
-    std::cout << "All tasks completed.\n";
+    std::cout<<"all tasks finsh"<<std::endl;
     return 0;
 }
-// int main(){
-//     threadpool jzxc;
-//     return_type x1={{1,2},{3,4}};  
-//     return_type x2={{5,6},{7,8}};
-//     auto ans=jzxc.queuetasks(work,x1,x2);
-//     return_type o=ans.get();
-//     for(auto &x:o){
-//         for(auto y:x){
-//             std::cout<<y<<" ";
-//         }
-//         printf("\n");
-//     }
-//     return 0;
-// }
+
+return_type break_jz(std::vector<return_type> m){
+    int n=m.size();
+    return_type out=m[0];
+    for(int i=1;i<n;i++){
+        out=work(out,m[i]);
+    }
+    return out;
+}
 
 return_type work(const return_type&A,const return_type&B){
     return_type out(A.size(),std::vector<double>(B[0].size()));
