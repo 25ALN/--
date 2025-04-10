@@ -37,20 +37,17 @@ public:
     }
 
     template<typename F,typename hd=std::function<void(return_type)>>
-    auto queuetasks(F&&f,std::vector<return_type> q,hd data=nullptr){ //定义了一个参数获取回调的东西
+    auto queuetasks(F&&f,std::vector<return_type> q){ //定义了一个参数获取回调的东西
         auto task=std::make_shared<std::packaged_task<return_type()>>([=](){  //对任务进行封装
             return f(q);
         }); 
         std::future<return_type> r=task->get_future();
         {
             std::unique_lock<std::mutex> lock(qmutex);
-            tasks.emplace([task,data](){
+            tasks.emplace([task](){
             std::thread::id threadid=std::this_thread::get_id();
             std::cout<<"thread "<<threadid<<" start working"<<std::endl;
             (*task)();
-            if(data){
-            data(task->get_future().get());
-            }
             std::cout<<"thread "<<threadid<<" finsh tasks"<<std::endl;
             });
         }

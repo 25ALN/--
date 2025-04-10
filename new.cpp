@@ -496,8 +496,3 @@ using namespace std;
 //     s1.join();
 //     return 0;
 // }
-
-int main(){
-    auto x=std::make_shared(std::move(3));
-    return 0;
-}
