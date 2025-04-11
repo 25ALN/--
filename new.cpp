@@ -496,3 +496,96 @@ using namespace std;
 //     s1.join();
 //     return 0;
 // }
+
+//拷贝构造函数(通过已有对象来创建新的对象)
+// class Person{
+// public:
+//     string name;
+//     Person(const string &n):name(n){
+//         cout<<"fuzhi begin"<<endl;
+//     }
+//     Person(const Person &otherperson){
+//         name=otherperson.name;
+//     }
+//     void print() const{
+//         cout<<"I'am "<<name;
+//     }
+// };
+// int main(){
+//     Person a("Bob");
+//     Person b=a;
+//     b.print();
+//     return 0;
+// }
+
+//c++ list exercise
+class List{
+public:
+    int val;
+    List *next;
+    List(int data):val(data),next(nullptr){};
+};
+
+class Listwork{
+public:
+    Listwork():head(nullptr){};
+
+    void tail_in(int val){
+        List *cur=new List(val);
+        if(head==nullptr){
+            head=cur;
+        }else{
+            List *temp=head;
+            while(temp->next) temp=temp->next;
+            temp->next=cur;
+        }
+    }
+
+    void delete_val(int val){
+        if(!head) return;
+        if(head->val==val){
+            List *temp=head;
+            head=head->next;
+            delete temp;
+            return;
+        }
+        List *curr=head;
+        while(curr->next->val!=val&&curr->next!=nullptr){
+            curr=curr->next;
+        }
+        if(curr->next){
+            List *temp=curr->next;
+            curr->next=curr->next->next;
+            delete temp;
+        }
+    }
+
+    void print(){
+        List *temp=head;
+        while(temp){
+            cout<<temp->val<<" ";
+            temp=temp->next;
+        }
+    }
+
+    ~Listwork(){
+        while(head){
+            List *f=head;
+            head=head->next;
+            delete f;
+        }
+    }
+private:
+    List *head;
+};
+int main(){
+    Listwork l;
+    l.tail_in(10);
+    l.tail_in(20);
+    l.tail_in(30);
+    l.print();
+    printf("\n");
+    l.delete_val(20);
+    l.print();
+    return 0;
+}
