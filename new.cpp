@@ -519,73 +519,92 @@ using namespace std;
 // }
 
 //c++ list exercise
-class List{
-public:
-    int val;
-    List *next;
-    List(int data):val(data),next(nullptr){};
-};
 
-class Listwork{
-public:
-    Listwork():head(nullptr){};
+// class List{
+// public:
+//     int val;
+//     List *next;
+//     List(int data):val(data),next(nullptr){};
+// };
 
-    void tail_in(int val){
-        List *cur=new List(val);
-        if(head==nullptr){
-            head=cur;
-        }else{
-            List *temp=head;
-            while(temp->next) temp=temp->next;
-            temp->next=cur;
-        }
-    }
+// class Listwork{
+// public:
+//     Listwork():head(nullptr){};
 
-    void delete_val(int val){
-        if(!head) return;
-        if(head->val==val){
-            List *temp=head;
-            head=head->next;
-            delete temp;
-            return;
-        }
-        List *curr=head;
-        while(curr->next->val!=val&&curr->next!=nullptr){
-            curr=curr->next;
-        }
-        if(curr->next){
-            List *temp=curr->next;
-            curr->next=curr->next->next;
-            delete temp;
-        }
-    }
+//     void tail_in(int val){
+//         List *cur=new List(val);
+//         if(head==nullptr){
+//             head=cur;
+//         }else{
+//             List *temp=head;
+//             while(temp->next) temp=temp->next;
+//             temp->next=cur;
+//         }
+//     }
 
-    void print(){
-        List *temp=head;
-        while(temp){
-            cout<<temp->val<<" ";
-            temp=temp->next;
-        }
-    }
+//     void delete_val(int val){
+//         if(!head) return;
+//         if(head->val==val){
+//             List *temp=head;
+//             head=head->next;
+//             delete temp;
+//             return;
+//         }
+//         List *curr=head;
+//         while(curr->next->val!=val&&curr->next!=nullptr){
+//             curr=curr->next;
+//         }
+//         if(curr->next){
+//             List *temp=curr->next;
+//             curr->next=curr->next->next;
+//             delete temp;
+//         }
+//     }
 
-    ~Listwork(){
-        while(head){
-            List *f=head;
-            head=head->next;
-            delete f;
-        }
-    }
-private:
-    List *head;
-};
-int main(){
-    Listwork l;
-    l.tail_in(10);
-    l.tail_in(20);
-    l.tail_in(30);
-    l.print();
-    printf("\n");
-    l.delete_val(20);
-    l.print();
-    return 0;
-}
+//     void print(){
+//         List *temp=head;
+//         while(temp){
+//             cout<<temp->val<<" ";
+//             temp=temp->next;
+//         }
+//     }
+
+//     ~Listwork(){
+//         while(head){
+//             List *f=head;
+//             head=head->next;
+//             delete f;
+//         }
+//     }
+// private:
+//     List *head;
+// };
+// int main(){
+//     Listwork l;
+//     l.tail_in(10);
+//     l.tail_in(20);
+//     l.tail_in(30);
+//     l.print();
+//     printf("\n");
+//     l.delete_val(20);
+//     l.print();
+//     return 0;
+// }
+
+// int main(){
+//     vector<string> x;
+//     int n=2;
+//     for(int i=0;i<n;i++){
+//         string temp;
+//         getline(cin,temp);
+//         x.push_back(temp);
+//     }
+//     for(auto j:x){
+//         cout<<j<<endl;
+//     }
+//     string x1="easy",x2="qunin";
+//     if(x[0].find(x1)){
+//         cout<<"find it!";
+//     }
+//     return 0;
+// }
