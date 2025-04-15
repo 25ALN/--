@@ -608,3 +608,18 @@ using namespace std;
 //     }
 //     return 0;
 // }
+
+int main(){
+    string x="aczzx";
+    int grade=0;
+    for(int i=x.size()-1;i>=1;i--){
+        for(int j=i-1;j>=0;j--){
+            if((x[i]+x[j]+1-2*'a')/2==13){
+                grade+=i-j;
+                cout<<"i="<<i<<" j="<<j<<endl;
+                break;
+            }
+        }
+    }
+    return 0;
+}
