@@ -402,6 +402,19 @@ int main(){
    return 0;
 }
 ```
+
+#### 去重操作
+```c
+vector<int > nums{3, 1, 2, 3, 2, 1, 4};
+   std::sort(nums.begin(),nums.end());
+   for(auto &i:nums){
+      cout<<i<<" ";
+   }
+   auto last=std::unique(nums.begin(),nums.end()); //将重复元素移动到最后
+   nums.erase(last,nums.end()); //去除调重复元素
+```    
+
+
 #### 删除操作
 forward list 有特殊版本的 erase,参见9.3.4节(第312页)。
 forward_list 不支持 pop_back; vector 和 string 不支持 pop_front。
