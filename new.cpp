@@ -609,17 +609,32 @@ using namespace std;
 //     return 0;
 // }
 
+// int main(){
+//     string x="aczzx";
+//     int grade=0;
+//     for(int i=x.size()-1;i>=1;i--){
+//         for(int j=i-1;j>=0;j--){
+//             if((x[i]+x[j]+1-2*'a')/2==13){
+//                 grade+=i-j;
+//                 cout<<"i="<<i<<" j="<<j<<endl;
+//                 break;
+//             }
+//         }
+//     }
+//     return 0;
+// }
+
 int main(){
-    string x="aczzx";
-    int grade=0;
-    for(int i=x.size()-1;i>=1;i--){
-        for(int j=i-1;j>=0;j--){
-            if((x[i]+x[j]+1-2*'a')/2==13){
-                grade+=i-j;
-                cout<<"i="<<i<<" j="<<j<<endl;
-                break;
-            }
-        }
+    vector<int > nums{100,4,200,1,3,2};
+    std::sort(nums.begin(),nums.end());
+    for(auto &i:nums){
+        cout<<i<<" ";
+    }
+    auto last=std::unique(nums.begin(),nums.end());
+    nums.erase(last,nums.end());
+    printf("\n");
+    for(auto &j:nums){
+        cout<<j<<" ";
     }
     return 0;
 }
