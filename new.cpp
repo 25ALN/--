@@ -624,17 +624,39 @@ using namespace std;
 //     return 0;
 // }
 
+// int main(){
+//     vector<int > nums{100,4,200,1,3,2};
+//     std::sort(nums.begin(),nums.end());
+//     for(auto &i:nums){
+//         cout<<i<<" ";
+//     }
+//     auto last=std::unique(nums.begin(),nums.end());
+//     nums.erase(last,nums.end());
+//     printf("\n");
+//     for(auto &j:nums){
+//         cout<<j<<" ";
+//     }
+//     return 0;
+// }
+
+class Person{
+    public:
+    void getyear(int a){
+        this->year=a;
+    } 
+    int ryear(){
+        return this->year;
+    }
+    private:
+    int year;
+    string name;
+    string project;
+    string sex;
+};
+
 int main(){
-    vector<int > nums{100,4,200,1,3,2};
-    std::sort(nums.begin(),nums.end());
-    for(auto &i:nums){
-        cout<<i<<" ";
-    }
-    auto last=std::unique(nums.begin(),nums.end());
-    nums.erase(last,nums.end());
-    printf("\n");
-    for(auto &j:nums){
-        cout<<j<<" ";
-    }
+    Person x1;
+    x1.getyear(26);
+    std::cout<<x1.ryear();
     return 0;
 }
