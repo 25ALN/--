@@ -642,16 +642,22 @@ using namespace std;
 class Person{
     public:
     void getyear(int a){
-        this->year=a;
+        year=a;
+    }
+    void getname(string N){
+        name=N;
+    }
+    string rname() const{
+        return name;
     } 
-    int ryear(){
-        return this->year;
+    int ryear () const{
+        return year;
     }
     private:
     int year;
-    string name;
-    string project;
-    string sex;
+    std::string name;
+    std::string project;
+    std::string sex;
 };
 
 int main(){
