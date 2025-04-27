@@ -639,30 +639,72 @@ using namespace std;
 //     return 0;
 // }
 
-class Person{
+// class Person{
+//     public:
+//     Person(const string p,const string s):project(p),sex(s){};
+//     void getyear(int a){
+//         year=a;
+//     }
+//     void getname(string N){
+//         name=N;
+//     }
+//     string rname() const{
+//         return name;
+//     } 
+//     int ryear () const{
+//         return year;
+//     }
+
+//     private:
+//     int year;
+//     std::string name;
+//     std::string project;
+//     std::string sex;
+// };
+// Person::Person(){
+//     name("hee");
+// }
+// int main(){
+//     Person x1("math","man");
+//     x1.getyear(26);
+//     std::cout<<x1.ryear()<<std::endl;
+//     return 0;
+// }
+
+class Line{
     public:
-    void getyear(int a){
-        year=a;
-    }
-    void getname(string N){
-        name=N;
-    }
-    string rname() const{
-        return name;
-    } 
-    int ryear () const{
-        return year;
-    }
+    int getlen();
+    Line(int len);
+    Line(const Line &abj);
+    ~Line();
     private:
-    int year;
-    std::string name;
-    std::string project;
-    std::string sex;
+    int *ptr;
 };
 
+Line::Line(int len){
+    ptr=new int;
+    *ptr=len;
+}
+
+Line::Line(const Line &abj){
+    ptr=new int;
+    *ptr=*abj.ptr;
+}
+
+Line::~Line(){
+    delete ptr;
+}
+
+int Line::getlen(){
+    return *ptr;
+}
+
+void shownum(Line &abj){
+    std::cout<<abj.getlen()<<std::endl;
+}
+
 int main(){
-    Person x1;
-    x1.getyear(26);
-    std::cout<<x1.ryear();
+    Line x(2);
+    shownum(x);
     return 0;
 }
